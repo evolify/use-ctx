@@ -1,6 +1,6 @@
 {
   "name": "ctx-react",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "lib/index.js",
   "repository": "git@github.com:evolify/ctx-react.git",
   "author": "孤狼 <wolf@evolify.cn>",

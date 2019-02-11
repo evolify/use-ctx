@@ -1738,10 +1738,10 @@ csso@~2.3.1:
     clap "^1.0.9"
     source-map "^0.5.3"
 
-ctx-react@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/ctx-react/-/ctx-react-1.0.0.tgz#9b8ee21843b2430efb5316c52cbeb836dd303cdc"
-  integrity sha512-kcm5vsnnavSK+njMut5N8JscNBpNG9PzrndCC3R3diWCgdhsGHxEmKhBf0XwxfZXylC2/RNPp27b1wYq7y+PwA==
+ctx-react@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ctx-react/-/ctx-react-1.0.1.tgz#d19ef51ae75a63ce21589de9e522ab14c76a01f8"
+  integrity sha512-OEHAftudUI3jEzujV6LhvZpA24i+hYy2+zjA38s2x9AIuW5m0C+NkmSr0+6AOnSKTev4ozfj2TJxsRUrDiP4Mw==
   dependencies:
     react "^16.7.0"
 

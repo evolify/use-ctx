@@ -33,7 +33,10 @@ class ProviderClass extends React.Component {
         return true
       },
       get: (target, key, proxy) => {
-        return this.observe(Reflect.get(target, key, proxy), update)
+        if(key in target.__proto__){
+          return Reflect.get(target, key, proxy)
+        }
+        return this.observe(Reflect.get(target,key,proxy), update)
       }
     })
   }
@@ -41,7 +44,7 @@ class ProviderClass extends React.Component {
     const val = {}
     stores.forEach(store => {
       const keys = [...Reflect.ownKeys(store), ...Reflect.ownKeys(store.__proto__)]
-      keys.filter(k => store.__excludeKeys.every(_k => _k !== k)).forEach(k => {
+      keys.filter(k => !(store.__excludeKeys && store.__excludeKeys.some(_k => _k === k))).forEach(k => {
         let t = store[k]
         val[k] = t instanceof Function ? t.bind(store) : t
       })

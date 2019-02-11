@@ -37,9 +37,9 @@ With es6 Proxy and React Context Api, you can manage you state with simple js cl
    ```js
    import axios from 'axios'
    class Store {
-     userId: 00001
-     userName: zz
-     addr: {
+     userId = 00001
+     userName = zz
+     addr = {
        province: 'Zhejiang',
        city: 'Hangzhou'
      }
@@ -111,13 +111,13 @@ import axios from 'axios'
 import {exclude} from 'ctx-react'
 // If you don`t want to connect some data to your app, you can use exclude.
 class Store {
-  userId: 00001
-  userName: zz
-  addr: {
+  userId = 00001
+  userName = zz
+  addr = {
     province: 'Zhejiang',
     city: 'Hangzhou'
   }
-  @exclude temp: 'the data will not be proxied, and not be mapped to your props'
+  @exclude temp = 'the data will not be proxied, and not be mapped to your props'
 
   login() {
     axios.post('/login', {
