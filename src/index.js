@@ -33,10 +33,10 @@ class ProviderClass extends React.Component {
         return true
       },
       get: (target, key, proxy) => {
-        if(key in target.__proto__){
+        if (key in target.__proto__) {
           return Reflect.get(target, key, proxy)
         }
-        return this.observe(Reflect.get(target,key,proxy), update)
+        return this.observe(Reflect.get(target, key, proxy), update)
       }
     })
   }
@@ -83,8 +83,11 @@ const renderConsumer = (Consumer, Comp, mapToProps) => props => (
   </Consumer>
 )
 
-const isReactComponent = c => {
-  return c && Reflect.ownKeys(React.Component.prototype).every(k => Reflect.ownKeys(c.prototype.__proto__).some(t => t === k))
+function isReactComponent(C){
+  return typeof C === 'function' && (
+    C.prototype.isReactComponent || 
+    /return.*\.createElement\(/.test(String(C))
+  )
 }
 
 const consumer = ctx => (...keys) => {

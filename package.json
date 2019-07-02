@@ -1,6 +1,6 @@
 {
   "name": "ctx-react",
-  "version": "1.0.2",
+  "version": "1.1.4",
   "main": "lib/index.js",
   "repository": "git@github.com:evolify/ctx-react.git",
   "author": "孤狼 <wolf@evolify.cn>",
@@ -10,7 +10,7 @@
     "pub": "npm run compile && npm publish",
     "git-push": "git add . && git commit && git push"
   },
-  "dependencies": {
+  "peerDependencies": {
     "react": "^16.7.0"
   },
   "devDependencies": {
@@ -19,5 +19,8 @@
     "@babel/plugin-proposal-class-properties": "^7.3.0",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0"
-  }
+  },
+  "files": [
+    "lib"
+  ]
 }
