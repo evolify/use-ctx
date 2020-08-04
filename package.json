@@ -1,24 +1,26 @@
 {
-  "name": "ctx-react",
+  "name": "use-ctx",
   "version": "1.1.4",
   "main": "lib/index.js",
-  "repository": "git@github.com:evolify/ctx-react.git",
+  "module": "esm/index.js",
+  "repository": "git@github.com:evolify/use-ctx.git",
   "author": "孤狼 <wolf@evolify.cn>",
   "license": "MIT",
   "scripts": {
     "compile": "babel src -d lib",
     "pub": "npm run compile && npm publish",
-    "git-push": "git add . && git commit && git push"
+    "git-push": "git add . && git commit && git push",
+    "test": "jest --config ../../jest.config.js --coverage",
+    "build:esm": "rm -rf esm && tsc --module es6 --outDir esm",
+    "build:cjs": "rm -rf lib && tsc --module commonjs --outDir lib ",
+    "build": "npm run build:esm && npm run build:cjs"
   },
   "peerDependencies": {
-    "react": "^16.7.0"
+    "react": "^16.8.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "@babel/preset-env": "^7.3.1",
-    "@babel/preset-react": "^7.0.0"
+    "@types/react": "^16.9.44",
+    "typescript": "^3.9.7"
   },
   "files": [
     "lib"
