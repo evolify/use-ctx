@@ -33,4 +33,3 @@ jobs:
           release_name: v${{ steps.version-updated.outputs.current-package-version }}
           draft: false
           prerelease: false
-
