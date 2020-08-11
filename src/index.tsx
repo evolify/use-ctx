@@ -1,6 +1,7 @@
-import React, { createContext, useContext } from 'react'
+import * as React from 'react'
 import { provider, consumer } from './utils'
 
+const { createContext, useContext } = React
 
 export const Context = createContext(null)
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import ProviderWrapper from './ProviderWrapper'
 
 const renderConsumer = (Consumer: React.Consumer<any>, Comp: React.ComponentType, mapToProps?: Function) => (props: any) => (

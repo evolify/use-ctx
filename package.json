@@ -1,6 +1,6 @@
 {
   "name": "use-ctx",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "main": "lib/index.js",
   "module": "esm/index.js",
   "repository": "git@github.com:evolify/use-ctx.git",
