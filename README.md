@@ -1,14 +1,14 @@
-# ctx-react
-Simple、reactive state management based on React Context Api. 
+# use-ctx
+Simple、reactive state management based on React Context Api and hooks. 
 
 With es6 Proxy and React Context Api, you can manage you state with simple js class.
 
 ### Usage：
 
-1. install ctx-react:
+1. install use-ctx:
 
    ```shell
-   yaran add ctx-react
+   yarn add use-ctx
    ```
 
 2. For a better development experience, you can add `decorators` and `class-properties` to your babel plugins:
@@ -58,15 +58,17 @@ With es6 Proxy and React Context Api, you can manage you state with simple js cl
    export default new Store()
    ```
 
-4. Connect the Store to React class with Provider:
+4. Connect the Store to your root component: 
+
+   * for class component, use`provider` decorator
 
    ```jsx
    import React from 'react'
-   import {Provider} from 'ctx-react'
+   import { provider } from 'use-ctx'
    import store from './Store'
    import Page from './Page'
    
-   @Provider(store)
+   @provider(store)
    export default class App extends React.Component {
      render(){
        return(
@@ -76,13 +78,34 @@ With es6 Proxy and React Context Api, you can manage you state with simple js cl
    }
    ```
 
-5. Map data and function in your store to any Component with Consumer:
+   * for functional component, use `withProvider`:
 
    ```jsx
    import React from 'react'
-   import {Consumer} from 'ctx-react'
+   import { withProvider } from 'use-ctx'
+   import store from './Store'
+   import Page from './Page'
    
-   @Consumer
+   function App(){
+     return(
+       <Page />
+     )
+   }
+   
+   export default withProvider(App)
+   ```
+
+   
+
+5. Map data and function in your store to any Component:
+
+   * for class component, use `consumer` decorator:
+
+   ```jsx
+   import React from 'react'
+   import { consumer } from 'use-ctx'
+   
+   @consumer
    export default class Page extends React.Component {
      render(){
        const {userId, userName, addr:{province,city}, login} = this.props
@@ -100,15 +123,36 @@ With es6 Proxy and React Context Api, you can manage you state with simple js cl
    }
    ```
 
+   * for functional component, use `useCtx` hook:
 
+   ```jsx
+   import React from 'react'
+   import { useCtx } from 'use-ctx'
+   
+   export default function Page(){
+     const {userId, userName, addr:{province,city}, login} = useCtx()
+     return(
+       <div>
+         <div className="user-id">{userId}</div>
+         <div className="user-name">{userName}</div>
+         <div className="addr-prov">{province}</div>
+         <div className="addr-city">{city}</div>
+         {/* form */}
+         <button onClick={login}>Login</button>
+       </div>
+     )
+   }
+   ```
 
-That`s all, all you need to do is write a simple store class, and connect to the app with Provider, anywhere you need to use the data and function, just use consumer.
+   
+
+That`s all, all you need to do is write a simple store class, and connect to the app with provider, anywhere you need to use the data and function, just use consumer.
 
 Of course，there are some Additional usage:
 
 ```js
 import axios from 'axios'
-import {exclude} from 'ctx-react'
+import { exclude } from 'use-ctx'
 // If you don`t want to connect some data to your app, you can use exclude.
 class Store {
   userId = 00001
@@ -133,21 +177,21 @@ class Store {
 export default new Store()
 ```
 
-By default, the `ctx-react` will export a Provider and Consumer from a default Context, if you wan't to use multi Context, just import the Context, and use Provider and Consumer from it:
+By default, the `use-ctx` will export a provider and consumer from a default Context, if you wan't to use multi Context, just import the Context, and use provider and consumer from it:
 
 ```jsx
-// App.jsx
+c// App.jsx
 import React from 'react'
-import Context, {Provider} from 'ctx-react'
+import Context, {provider} from 'use-ctx'
 import store from './Store'
 import store1 from './Store1'
 import Page from './Page'
 import Page1 from './Page1'
 
-const {Provider1,Consumer1} = Context
+const {provider: provider1, consumer: consumer1} = Context
 
-@Provider(store)
-@Provider1(store)
+@provider(store)
+@provider1(store1)
 export default class App extends React.Component {
   render(){
     return(
@@ -157,14 +201,14 @@ export default class App extends React.Component {
   }
 }
 
-export Consumer1
+export consumer1
 ```
 
 ```jsx
 // Page1.jsx
-import {Consumer1} from './App.jsx'
+import {consumer1} from './App.jsx'
 
-@Consumer1
+@consumer1
 // ...
 ```
 
@@ -173,30 +217,30 @@ import {Consumer1} from './App.jsx'
 You want to connect more than store to your app ?  Just add more store to Provider as you want:
 
 ```jsx
-import { Provider } from 'ctx-react'
+import { provider } from 'use-ctx'
 import store1 from './Store1'
 import store2 from './Store2'
 import store3 from './Store3'
 
-@Provider(store1, store2, store3)
+@provider({store1, store2, store3})
 // other code ...
 ```
 
-But you don`t want to map all data and function to the props ? just add keys you want to the Consumer:
+But you don`t want to map all data and function to the props ? just add keys you want to the consumer:
 
 ```jsx
-import { Consumer } from 'ctx-react'
+import { Consumer } from 'use-ctx'
 
-@Consumer('userId', 'userName', 'login')
+@consumer('userId', 'userName', 'login')
 // other code ...
 ```
 
 Or you can add a function to map the data:
 
 ```jsx
-import { Consumer } from 'ctx-react'
+import { consumer } from 'use-ctx'
 
-@Consumer(data => ({
+@consumer(data => ({
   prov: data.addr.provvince,
   city: data.addr.city
 }))
@@ -206,7 +250,7 @@ import { Consumer } from 'ctx-react'
 What about this ?
 
 ```jsx
-import { Consumer } from 'ctx-react'
+import { consumer } from 'use-ctx'
 
 @Consumer('userId',data => ({
   prov: data.addr.provvince,
@@ -216,8 +260,3 @@ import { Consumer } from 'ctx-react'
 ```
 
 Yes, just do what you want.
-
-### Future Feature:
-
-* Add scoop to the data.
-* ...

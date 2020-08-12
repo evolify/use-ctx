@@ -1,11 +1,11 @@
 import React from 'react'
-import { Provider, Consumer } from '../../src/index'
+import { provider, consumer } from 'use-ctx'
 import Store from './Store'
 // import Comp from './comp/Comp'
 import Act from './comp/Act'
 
-@Provider(new Store())
-@Consumer
+@provider(new Store())
+@consumer
 export default class App extends React.Component {
   render() {
     console.log(this.props)

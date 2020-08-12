@@ -56,7 +56,6 @@ export default class ProviderWrapper extends React.Component<IProps, { val: obje
       let t = stores[k]
       val[k] = t instanceof Function ? t.bind(stores) : t
     })
-    console.log('valueOf', stores)
     return val
   }
   render() {

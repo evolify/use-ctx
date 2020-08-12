@@ -1,11 +1,11 @@
 import React from 'react'
-import Ctx from 'ctx-react '
+import Ctx from 'use-ctx '
 import Act from './Act'
 import Store from '../Store';
-const {Provider,Consumer} = Ctx
+const {provider,consumer} = Ctx
 
-@Provider(new Store(), new Act())
-@Consumer
+@provider(new Store(), new Act())
+@consumer
 export default class Comp extends React.Component {
   render() {
     const { a, b, c, d, temp, setA, setC,setTemp, setFavCount, fav: {count} } = this.props

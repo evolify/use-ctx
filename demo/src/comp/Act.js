@@ -1,4 +1,4 @@
-import {exclude} from 'ctx-react'
+import {exclude} from 'use-ctx'
 export default class {
   a = 'zz'
   b = 0

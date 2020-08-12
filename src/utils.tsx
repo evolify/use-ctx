@@ -22,7 +22,7 @@ export function isReactComponent(C: any) {
   )
 }
 
-export const provider = (ctx: React.Context<any>) => (stores: any) => (Comp: React.ComponentType) => (props: any = {}) => {
+export const getProvider = (ctx: React.Context<any>) => (stores: any) => (Comp: React.ComponentType) => (props: any = {}) => {
 
   return (
     <ProviderWrapper ctx={ctx} stores={stores}>
@@ -31,7 +31,7 @@ export const provider = (ctx: React.Context<any>) => (stores: any) => (Comp: Rea
   )
 }
 
-export const consumer = (ctx: React.Context<any>) => (...keys: Array<any>) => {
+export const getConsumer = (ctx: React.Context<any>) => (...keys: Array<any>) => {
   if (keys.length && isReactComponent(keys[0])) {
     return renderConsumer(ctx.Consumer, keys[0])
   }
